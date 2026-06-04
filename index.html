@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifesto AI — Pre-Procedure Intelligence for EHRs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 100;
+            padding: 0.8rem 0;
+        }
+        nav .container {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-weight: 700; font-size: 1.1rem; color: #1e293b; }
+        nav .logo span { margin-right: 0.4rem; }
+        nav .nav-links a {
+            color: #64748b; text-decoration: none; margin-left: 1.5rem;
+            font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+        }
+        nav .nav-links a:hover { color: #1e40af; }
+
+        /* Hero / Title Slide */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e40af 100%);
+            padding: 8rem 2rem 5rem;
+            text-align: center;
+            color: white;
+            min-height: 90vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .hero .subtitle { font-size: 1.4rem; color: #94a3b8; margin-bottom: 2rem; }
+        .hero .tagline {
+            font-size: 1rem; color: #64748b; max-width: 600px; margin: 0 auto;
+            line-height: 1.8;
+        }
+        .hero .badge {
+            display: inline-block; margin-top: 2.5rem;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 2rem; padding: 0.5rem 1.5rem;
+            font-size: 0.85rem; color: #94a3b8;
+        }
+
+        /* Sections */
+        section { padding: 5rem 0; }
+        section:nth-child(even) { background: white; }
+
+        .section-title {
+            font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .section-subtitle {
+            color: #64748b; font-size: 1.05rem; margin-bottom: 2.5rem;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; margin: 2rem 0;
+        }
+        .stat-card {
+            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 2rem; text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .stat-number { font-size: 3.5rem; font-weight: 800; margin-bottom: 0.3rem; }
+        .stat-number.red { color: #dc2626; }
+        .stat-number.blue { color: #2563eb; }
+        .stat-number.green { color: #16a34a; }
+        .stat-number.white { color: white; }
+        .stat-label { color: #64748b; font-size: 0.9rem; }
+        .stat-card-dark {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: none; color: white;
+        }
+        .stat-card-dark .stat-label { color: #94a3b8; }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%; border-collapse: collapse; margin: 1.5rem 0;
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+        .comparison-table th {
+            background: #f1f5f9; padding: 1rem 1.2rem;
+            text-align: left; font-weight: 600; font-size: 0.9rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .comparison-table td {
+            padding: 0.9rem 1.2rem; border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem; vertical-align: top;
+        }
+        .comparison-table .epic-col { color: #64748b; }
+        .comparison-table .us-col { color: #1e40af; font-weight: 500; }
+
+        /* How it works */
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+        .step-card {
+            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 2rem; position: relative;
+        }
+        .step-card h3 { color: #1e40af; margin-bottom: 0.8rem; font-size: 1.1rem; }
+        .step-card ul { list-style: none; padding: 0; }
+        .step-card li {
+            padding: 0.3rem 0; font-size: 0.9rem; color: #475569;
+            padding-left: 1.2rem; position: relative;
+        }
+        .step-card li::before {
+            content: ""; position: absolute; left: 0; top: 0.7rem;
+            width: 6px; height: 6px; border-radius: 50%; background: #3b82f6;
+        }
+
+        /* Alert cards */
+        .alerts-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 1.2rem; margin-top: 1.5rem;
+        }
+        .alert-card {
+            border-radius: 10px; padding: 1.2rem 1.5rem;
+            border-left: 5px solid;
+        }
+        .alert-card.critical {
+            background: #fef2f2; border-color: #dc2626;
+        }
+        .alert-card.warning {
+            background: #fffbeb; border-color: #f59e0b;
+        }
+        .alert-card.info {
+            background: #eff6ff; border-color: #3b82f6;
+        }
+        .alert-card h4 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .alert-card p { font-size: 0.85rem; color: #475569; margin: 0.2rem 0; }
+
+        /* Integration section */
+        .two-col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+            margin: 2rem 0;
+        }
+        .col-card {
+            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 2rem;
+        }
+        .col-card h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+        .col-card ul { list-style: none; padding: 0; }
+        .col-card li { padding: 0.4rem 0; font-size: 0.9rem; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            padding: 5rem 2rem; text-align: center; color: white;
+        }
+        .cta-section h2 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+        .cta-section p { font-size: 1.1rem; color: #dbeafe; max-width: 700px; margin: 0 auto 1rem; }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid #3b82f6; margin: 2rem 0;
+            padding: 1.5rem 2rem; background: #f8fafc; border-radius: 0 8px 8px 0;
+            font-size: 0.95rem; color: #475569;
+        }
+        blockquote strong { color: #1e293b; }
+
+        /* Architecture */
+        .arch-block {
+            background: #1e293b; color: #e2e8f0; border-radius: 12px;
+            padding: 2rem; margin-top: 2rem; overflow-x: auto;
+        }
+        .arch-block pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.8rem; line-height: 1.5; white-space: pre;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b; color: #94a3b8; text-align: center;
+            padding: 2rem; font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1.1rem; }
+            .two-col { grid-template-columns: 1fr; }
+            .alerts-grid { grid-template-columns: 1fr; }
+            nav .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <div class="logo"><span>&#x1F3E5;</span> Manifesto AI</div>
+        <div class="nav-links">
+            <a href="#problem">Problem</a>
+            <a href="#solution">Solution</a>
+            <a href="#how">How It Works</a>
+            <a href="#example">Example</a>
+            <a href="#market">Market</a>
+        </div>
+    </div>
+</nav>
+
+<!-- SLIDE 1: HERO -->
+<section class="hero">
+    <div>
+        <h1>Manifesto AI</h1>
+        <p class="subtitle">Pre-Procedure Intelligence Layer for the EHR</p>
+        <p class="tagline">
+            We don't replace Epic. We read it &mdash; and generate the synthesis that
+            currently lives in sticky notes and the surgeon's head.
+        </p>
+        <div class="badge">SoPA Hackathon &bull; UC San Diego &bull; 2026</div>
+    </div>
+</section>
+
+<!-- SLIDE 2: THE PROBLEM -->
+<section id="problem">
+    <div class="container">
+        <h2 class="section-title">The Problem: Information Exists. Synthesis Doesn't.</h2>
+        <p class="section-subtitle">Everything is documented &mdash; but nobody connects the dots across 15+ Epic screens.</p>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number red">15+</div>
+                <p class="stat-label"><strong>Epic screens</strong> a nurse must review to prep a surgical patient</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number red">20 min</div>
+                <p class="stat-label"><strong>Average time</strong> a pre-op coordinator spends per patient piecing together the plan</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number red">22%</div>
+                <p class="stat-label"><strong>of surgical delays</strong> caused by incomplete pre-op preparation (AORN 2023)</p>
+            </div>
+        </div>
+
+        <blockquote>
+            <strong>The data is all there.</strong> The patient's Plavix is in the MAR. The stent is in the Problem List.
+            The biopsy is in the procedure order. But <strong>nobody connects those three facts</strong> into
+            "hemostatic clips need to be in the room" until someone manually thinks about it.
+            <br><br>
+            &mdash; This is what Gawande calls an "error of inaptitude" &mdash; not a knowledge gap, but a synthesis gap.
+        </blockquote>
+    </div>
+</section>
+
+<!-- SLIDE 3: EPIC vs US -->
+<section id="solution">
+    <div class="container">
+        <h2 class="section-title">Epic is a Data Warehouse. We're the Intelligence Layer.</h2>
+        <p class="section-subtitle">We don't compete with the EHR &mdash; we complete it.</p>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width:22%">Task</th>
+                    <th style="width:39%" class="epic-col">What Epic Does</th>
+                    <th style="width:39%" class="us-col">What We Add</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Drug alerts</strong></td>
+                    <td class="epic-col">Fires individual BPA pop-ups (alert fatigue &mdash; 90%+ override rate)</td>
+                    <td class="us-col">Connects medication + procedure + history &rarr; specific action with context</td>
+                </tr>
+                <tr>
+                    <td><strong>Pre-op prep</strong></td>
+                    <td class="epic-col">Stores orders as a list. Coordinator manually interprets.</td>
+                    <td class="us-col">Generates role-specific task lists: what YOU need to do, and why</td>
+                </tr>
+                <tr>
+                    <td><strong>Protocol deviations</strong></td>
+                    <td class="epic-col">Doesn't flag when a patient DOESN'T fit standard protocol</td>
+                    <td class="us-col">Explicitly states: "Standard protocol won't work because..."</td>
+                </tr>
+                <tr>
+                    <td><strong>Readiness tracking</strong></td>
+                    <td class="epic-col">Each item (labs, consent, escort) is in a different module</td>
+                    <td class="us-col">Single view: is this patient actually ready? What's still pending?</td>
+                </tr>
+                <tr>
+                    <td><strong>Role-based views</strong></td>
+                    <td class="epic-col">Same chart view for everyone. Nurse sees surgeon's notes.</td>
+                    <td class="us-col">Anesthesia sees anesthesia concerns. Nurse sees nursing tasks. No noise.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SLIDE 4: HOW IT WORKS -->
+<section id="how">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Launches inside Epic as a SMART on FHIR app. Zero new data entry. Zero documentation burden.</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <h3>1. Read</h3>
+                <ul>
+                    <li>MedicationRequest</li>
+                    <li>AllergyIntolerance</li>
+                    <li>Condition (Problem List)</li>
+                    <li>Observation (Labs/Vitals)</li>
+                    <li>ServiceRequest (Scheduled procedure)</li>
+                    <li>DocumentReference (Notes)</li>
+                </ul>
+            </div>
+            <div class="step-card">
+                <h3>2. Cross-Reference</h3>
+                <ul>
+                    <li>Meds &times; Procedure type &rarr; hold/bridge plan</li>
+                    <li>Allergies &times; Standard protocols &rarr; substitutions</li>
+                    <li>History &times; Surgery risk &rarr; prophylaxis changes</li>
+                    <li>Labs &times; Timing &rarr; readiness confirmation</li>
+                </ul>
+            </div>
+            <div class="step-card">
+                <h3>3. Generate</h3>
+                <ul>
+                    <li>Protocol deviations (what's different for THIS patient)</li>
+                    <li>Role-specific action lists</li>
+                    <li>Day-of readiness tracker</li>
+                    <li>Time-out script with patient-specific callouts</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 5: EXAMPLE -->
+<section id="example">
+    <div class="container">
+        <h2 class="section-title">Real Example: What Gets Caught</h2>
+        <p class="section-subtitle">Patient: Margaret Thompson, 70F, scheduled for Total Knee Arthroplasty</p>
+
+        <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #475569;">
+            <strong>What lives in separate Epic screens:</strong>
+            MAR: Warfarin 5mg daily (for AFib) &bull;
+            Problem List: History of DVT (2019), Latex allergy, Type 2 DM on insulin &bull;
+            Allergy List: Sulfonamide &rarr; Anaphylaxis &bull;
+            Labs: INR 2.3, HbA1c 7.8%
+        </p>
+
+        <p style="margin-bottom: 1rem; font-weight: 600;">What our system synthesizes (that nobody else assembles automatically):</p>
+
+        <div class="alerts-grid">
+            <div class="alert-card critical">
+                <h4>&#9888;&#65039; CANNOT use standard antibiotic (cefazolin)</h4>
+                <p><strong>Source:</strong> Sulfa allergy + Surgical prophylaxis protocol</p>
+                <p><strong>Action:</strong> Vancomycin 1g IV instead</p>
+                <p><strong>Why:</strong> Cephalosporin cross-reactivity risk with sulfa anaphylaxis</p>
+            </div>
+            <div class="alert-card warning">
+                <h4>&#9888;&#65039; Extended VTE prophylaxis required (4 weeks, not 2)</h4>
+                <p><strong>Source:</strong> DVT history + Major joint surgery</p>
+                <p><strong>Action:</strong> Enoxaparin extended protocol</p>
+                <p><strong>Why:</strong> Recurrence risk 3x higher with standard duration</p>
+            </div>
+            <div class="alert-card warning">
+                <h4>&#9888;&#65039; Latex-free protocol for entire OR</h4>
+                <p><strong>Source:</strong> Allergy list + OR setup</p>
+                <p><strong>Action:</strong> Latex-free cart, all supplies verified</p>
+                <p><strong>Why:</strong> Contact dermatitis &rarr; potential intra-op reaction</p>
+            </div>
+            <div class="alert-card info">
+                <h4>&#8505;&#65039; Insulin dose adjustment perioperatively</h4>
+                <p><strong>Source:</strong> MAR (Lantus 22u) + Endocrine consult</p>
+                <p><strong>Action:</strong> Half dose night before, hold morning of</p>
+                <p><strong>Why:</strong> Prevent perioperative hypoglycemia</p>
+            </div>
+        </div>
+
+        <blockquote>
+            <strong>None of these are individually hidden.</strong> But assembling them requires reading 5 different
+            modules and holding all the connections in your head &mdash; for every patient, every day.
+            That's where things get dropped.
+        </blockquote>
+    </div>
+</section>
+
+<!-- SLIDE 6: INTEGRATION -->
+<section id="integration">
+    <div class="container">
+        <h2 class="section-title">Integration Strategy: Work WITH the EHR, Not Against It</h2>
+        <p class="section-subtitle">Read-only intelligence layer that lives inside the existing workflow.</p>
+
+        <div class="two-col">
+            <div class="col-card">
+                <h3>What We DON'T Do</h3>
+                <ul>
+                    <li>&#10060; Replace any Epic functionality</li>
+                    <li>&#10060; Create new documentation</li>
+                    <li>&#10060; Require new data entry</li>
+                    <li>&#10060; Store PHI outside the EHR</li>
+                    <li>&#10060; Modify the clinical record</li>
+                    <li>&#10060; Make clinical decisions</li>
+                </ul>
+            </div>
+            <div class="col-card">
+                <h3>What We DO</h3>
+                <ul>
+                    <li>&#9989; Launch as SMART on FHIR sidebar app</li>
+                    <li>&#9989; Read existing data (read-only access)</li>
+                    <li>&#9989; Generate actionable synthesis in real-time</li>
+                    <li>&#9989; Present role-specific views</li>
+                    <li>&#9989; Track readiness across modules</li>
+                    <li>&#9989; Integrate with Epic's existing workflow</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="arch-block">
+            <pre>
+  Technical Integration Path:
+
+  1. Register as SMART on FHIR app (Epic App Orchard)
+  2. OAuth2 authorization - clinician launches from patient chart
+  3. Read FHIR resources (Patient, Condition, MedicationRequest,
+     AllergyIntolerance, Observation, ServiceRequest)
+  4. Cross-reference against procedure protocols
+  5. Display synthesis in sidebar - clinician stays in Epic
+
+  Data Flow:
+
+  Epic Hyperspace --> FHIR Server (Interconnect) --> Manifesto AI Engine
+                                                          |
+                                                    SMART App (in-browser)
+                                                          |
+                                                  External APIs (OpenFDA, RxNorm)
+            </pre>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 7: MARKET -->
+<section id="market" style="background: linear-gradient(135deg, #1e293b, #334155); color: white;">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Impact & Market</h2>
+        <p class="section-subtitle" style="color: #94a3b8;">The synthesis gap costs hospitals billions &mdash; and exists at every Epic site.</p>
+
+        <div class="stats-row">
+            <div class="stat-card stat-card-dark">
+                <div class="stat-number white">$37B</div>
+                <p class="stat-label"><strong>Annual cost</strong> of surgical delays and cancellations in the US (Bain & Co, 2022)</p>
+            </div>
+            <div class="stat-card stat-card-dark">
+                <div class="stat-number white">3-5%</div>
+                <p class="stat-label"><strong>Day-of cancellation rate</strong> for elective surgeries &mdash; most due to prep failures</p>
+            </div>
+            <div class="stat-card stat-card-dark">
+                <div class="stat-number white">86%</div>
+                <p class="stat-label"><strong>of hospitals</strong> use Epic &mdash; and all have this synthesis gap</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; color: #cbd5e1; font-size: 0.95rem;">
+            <p><strong style="color: white;">Target users:</strong></p>
+            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                <li>Pre-op coordinators (save 20 min/patient &times; 15 patients/day = 5 hours/day)</li>
+                <li>OR charge nurses (single readiness view vs. chart review)</li>
+                <li>Anesthesiologists (relevant-only patient factors, not full chart)</li>
+                <li>Surgeons (deviations from standard protocol highlighted)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SLIDE 8: CTA / ASK -->
+<section class="cta-section">
+    <div class="container">
+        <h2>The Ask</h2>
+        <p>
+            We're not building a new EHR. We're building the <strong>intelligence layer</strong>
+            that sits on top of the data hospitals already have &mdash; and generates the synthesis
+            that currently depends on human memory under stress.
+        </p>
+        <p style="color: #93c5fd; margin-top: 2rem;">
+            Next step: Pilot with one surgical service line at one hospital.<br>
+            Measure: Pre-op coordinator time saved, day-of cancellation rate, and missed-item rate.
+        </p>
+    </div>
+</section>
+
+<!-- APPENDIX -->
+<section id="appendix">
+    <div class="container">
+        <h2 class="section-title">Appendix</h2>
+
+        <details style="margin: 1.5rem 0; background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 1.5rem;">
+            <summary style="cursor: pointer; font-weight: 600; font-size: 1rem;">FHIR Resources Used</summary>
+            <table class="comparison-table" style="margin-top: 1rem;">
+                <thead>
+                    <tr><th>FHIR Resource</th><th>Epic Module</th><th>What We Read</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Patient</td><td>Demographics</td><td>Name, DOB, contacts, code status</td></tr>
+                    <tr><td>Condition</td><td>Problem List</td><td>Active diagnoses, ICD-10 codes</td></tr>
+                    <tr><td>MedicationRequest</td><td>MAR / Med List</td><td>Active meds, doses, prescribers</td></tr>
+                    <tr><td>AllergyIntolerance</td><td>Allergy List</td><td>Substances, reactions, severity</td></tr>
+                    <tr><td>Observation</td><td>Labs / Vitals</td><td>Recent results, vitals</td></tr>
+                    <tr><td>ServiceRequest</td><td>Orders / Scheduling</td><td>Scheduled procedure, pre-op orders</td></tr>
+                    <tr><td>DocumentReference</td><td>Notes</td><td>Consult notes, nursing assessments</td></tr>
+                </tbody>
+            </table>
+        </details>
+
+        <details style="margin: 1.5rem 0; background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 1.5rem;">
+            <summary style="cursor: pointer; font-weight: 600; font-size: 1rem;">Competitive Landscape</summary>
+            <table class="comparison-table" style="margin-top: 1rem;">
+                <thead>
+                    <tr><th>Product</th><th>What It Does</th><th>Gap</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Epic BPA Alerts</td><td>Single drug/allergy alerts</td><td>No cross-reference, 90%+ override rate</td></tr>
+                    <tr><td>Epic OpTime</td><td>Schedules OR time, equipment</td><td>Doesn't read patient chart for deviations</td></tr>
+                    <tr><td>Epic Anesthesia Pre-op</td><td>Documents anesthesia assessment</td><td>Doesn't synthesize for the anesthesiologist</td></tr>
+                    <tr><td>Nurse checklist tools</td><td>Generic checklists</td><td>Not patient-specific, not adaptive</td></tr>
+                    <tr><td><strong>Manifesto AI</strong></td><td><strong>Reads ALL modules, generates patient-specific synthesis</strong></td><td><strong>This is the gap we fill</strong></td></tr>
+                </tbody>
+            </table>
+        </details>
+    </div>
+</section>
+
+<footer>
+    <p>Manifesto AI &bull; Pre-Procedure Intelligence &bull; SoPA Hackathon &bull; UC San Diego &bull; 2026</p>
+</footer>
+
+</body>
+</html>
