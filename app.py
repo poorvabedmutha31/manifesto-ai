@@ -25,6 +25,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     st.divider()
-    st.caption("SoPA Hackathon • UC San Diego • 2026")
+    st.caption("SoPE Hackathon • UC San Diego • 2026")
 
 pg.run()

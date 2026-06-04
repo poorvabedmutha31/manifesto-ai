@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifesto AI — Pre-Procedure Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  background: #1e293b;
+  color: #fff;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.header .subtitle {
+  font-size: 0.875rem;
+  font-weight: 300;
+  opacity: 0.8;
+  margin-left: 0.5rem;
+  border-left: 1px solid rgba(255,255,255,0.3);
+  padding-left: 0.75rem;
+}
+
+/* Patient Banner */
+.patient-banner {
+  background: #1e40af;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.875rem;
+}
+.patient-banner .banner-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.patient-banner .banner-label {
+  font-weight: 300;
+  opacity: 0.8;
+}
+.patient-banner .banner-value {
+  font-weight: 600;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: #fff;
+  border-right: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.sidebar select {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  background: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+.sidebar select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+.sidebar .info-text {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 1rem;
+}
+.sidebar .info-text strong {
+  color: #1e293b;
+}
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.tab-btn {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: #e2e8f0;
+  color: #475569;
+  transition: all 0.2s;
+}
+.tab-btn:hover { background: #cbd5e1; }
+.tab-btn.active {
+  background: #1e40af;
+  color: #fff;
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+}
+.card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #1e293b;
+}
+.card h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #334155;
+}
+
+/* Alert cards */
+.alert-card {
+  border-left: 4px solid #dc2626;
+  background: #fef2f2;
+  padding: 0.875rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-bottom: 0.75rem;
+}
+.alert-card .alert-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #991b1b;
+  margin-bottom: 0.25rem;
+}
+.alert-card .alert-detail {
+  font-size: 0.775rem;
+  color: #7f1d1d;
+}
+
+/* Deviation cards */
+.deviation-card {
+  border-left: 4px solid #d97706;
+  background: #fffbeb;
+  padding: 0.875rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-bottom: 0.75rem;
+}
+.deviation-card .deviation-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #92400e;
+  margin-bottom: 0.25rem;
+}
+.deviation-card .deviation-detail {
+  font-size: 0.775rem;
+  color: #78350f;
+}
+
+/* Action items */
+.action-item {
+  border-left: 4px solid #22c55e;
+  background: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.action-item.urgent { border-left-color: #dc2626; }
+.action-item.important { border-left-color: #f59e0b; }
+.action-item .action-text {
+  font-weight: 600;
+  font-size: 0.825rem;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+.action-item .action-meta {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+/* Medication table */
+.med-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.med-col h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.med-col.hold h4 { color: #dc2626; }
+.med-col.continue h4 { color: #16a34a; }
+.med-col.adjust h4 { color: #d97706; }
+.med-item {
+  font-size: 0.8rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.med-item .med-name { font-weight: 500; }
+.med-item .med-note { font-size: 0.7rem; color: #64748b; margin-top: 0.15rem; }
+
+/* Consults */
+.consult-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.825rem;
+}
+.consult-status {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+.consult-status.complete { background: #dcfce7; color: #166534; }
+.consult-status.pending { background: #fef9c3; color: #854d0e; }
+
+/* Labs */
+.lab-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.825rem;
+}
+.lab-flag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+/* Equipment */
+.equip-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.825rem;
+}
+.equip-item .equip-reason {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+/* Role selector */
+.role-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.role-radio {
+  display: none;
+}
+.role-label {
+  padding: 0.5rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #475569;
+}
+.role-label:hover { border-color: #3b82f6; color: #1e40af; }
+.role-radio:checked + .role-label {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
+}
+.role-content { display: none; }
+.role-content.active { display: block; }
+
+/* Checklist */
+.checklist-group {
+  margin-bottom: 1.25rem;
+}
+.checklist-group h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  font-size: 0.825rem;
+}
+.checklist-item input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: #1e40af;
+  cursor: pointer;
+}
+.checklist-item label {
+  cursor: pointer;
+  line-height: 1.4;
+}
+.checklist-item.checked label {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+/* Progress */
+.progress-container {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.progress-header .progress-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.progress-header .progress-count {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+.progress-bar {
+  width: 100%;
+  height: 0.625rem;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.progress-fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 9999px;
+  transition: width 0.3s;
+}
+.readiness-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.375rem;
+  display: inline-block;
+}
+.readiness-status.ready { background: #dcfce7; color: #166534; }
+.readiness-status.nearly { background: #fef9c3; color: #854d0e; }
+.readiness-status.not-ready { background: #fef2f2; color: #991b1b; }
+
+/* Section titles */
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1e293b;
+}
+
+/* Footer */
+.page-footer {
+  background: #1e293b;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.7rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; min-width: auto; border-right: none; border-bottom: 1px solid #e2e8f0; }
+  .med-columns { grid-template-columns: 1fr; }
+  .patient-banner { flex-wrap: wrap; gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<nav style="background:#fff;border-bottom:1px solid #e5e7eb;padding:0.6rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="font-weight:700;font-size:1rem;color:#1e293b;text-decoration:none;">&#x1F3E5; Manifesto AI</a>
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <a href="index.html" style="color:#64748b;text-decoration:none;font-size:0.85rem;font-weight:500;">Pitch Deck</a>
+    <a href="clinical.html" style="color:#1e40af;text-decoration:none;font-size:0.85rem;font-weight:600;border-bottom:2px solid #1e40af;padding-bottom:2px;">Clinical App</a>
+    <a href="impact.html" style="color:#64748b;text-decoration:none;font-size:0.85rem;font-weight:500;">Impact &amp; Business</a>
+  </div>
+</nav>
+<div class="header">
+  <h1>Manifesto AI</h1>
+  <span class="subtitle">Pre-Procedure Intelligence</span>
+</div>
+
+<div class="patient-banner" id="patientBanner"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <label for="patientSelect">Select Patient</label>
+    <select id="patientSelect">
+      <option value="0">Martinez, Roberto J &mdash; EGD</option>
+      <option value="1">Thompson, Margaret A &mdash; TKA</option>
+    </select>
+
+    <p class="info-text">
+      <strong>What this solves:</strong> Today, nurses and coordinators spend 45+ minutes per patient manually reading through charts, cross-referencing protocols, and building action plans.
+    </p>
+    <p class="info-text">
+      This tool automatically identifies protocol deviations, generates role-specific action items, and tracks day-of readiness — reducing prep time and catching missed steps.
+    </p>
+    <p class="info-text">
+      Each view is tailored to the clinician's role, surfacing only what they need to act on.
+    </p>
+
+    <div class="sidebar-footer">
+      Integration: SMART on FHIR (launches inside Epic)
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="preop">Pre-Op Brief</button>
+      <button class="tab-btn" data-tab="roles">Role-Specific Views</button>
+      <button class="tab-btn" data-tab="readiness">Day-Of Readiness</button>
+    </div>
+
+    <div class="tab-content active" id="tab-preop"></div>
+    <div class="tab-content" id="tab-roles"></div>
+    <div class="tab-content" id="tab-readiness"></div>
+  </main>
+</div>
+
+<footer class="page-footer">
+  Manifesto AI &mdash; Pre-Procedure Intelligence. Integrates via SMART on FHIR.
+</footer>
+
+<script>
+// ============ PATIENT DATA ============
+const patients = [
+  {
+    name: "Martinez, Roberto J",
+    mrn: "MRN-00847291",
+    age: 64,
+    sex: "Male",
+    procedure: "EGD (Esophagogastroduodenoscopy) with biopsy",
+    procedureShort: "EGD",
+    date: "2026-06-05 @ 08:30",
+    provider: "Dr. Emily Chen, MD — Gastroenterology",
+    emergency_contact: "Sarah Martinez (Wife) - (619) 555-8765",
+    allergies: [
+      { agent: "Penicillin", reaction: "Rash", severity: "Mild" },
+      { agent: "Shellfish", reaction: "Hives/swelling", severity: "Moderate" }
+    ],
+    medications: [
+      { name: "Clopidogrel (Plavix)", dose: "75mg", alert: "HIGH ALERT - antiplatelet" },
+      { name: "Metoprolol", dose: "50mg", alert: null },
+      { name: "Atorvastatin", dose: "80mg", alert: null },
+      { name: "Omeprazole", dose: "40mg", alert: null },
+      { name: "Lisinopril", dose: "10mg", alert: null }
+    ],
+    problems: ["GERD", "Coronary stent (2024)", "Atherosclerotic heart disease", "Obstructive sleep apnea (moderate)", "Hyperlipidemia", "Hypertension"],
+    alerts: [
+      { title: "HIGH-ALERT MEDICATION: Clopidogrel (Plavix)", detail: "Antiplatelet agent — requires 5-day hold pre-procedure. Cardiology has cleared." },
+      { title: "OBSTRUCTIVE SLEEP APNEA", detail: "Moderate OSA — CPAP required in recovery. ASA Physical Status Class III." }
+    ],
+    protocol_deviations: [
+      { title: "HEMOSTATIC EQUIPMENT REQUIRED", detail: "Patient on antiplatelet therapy (Plavix held 5 days). Backup hemostatic clips and epinephrine injection must be in room." }
+    ],
+    med_plan: {
+      hold: [
+        { name: "Clopidogrel (Plavix) 75mg", note: "Hold 5 days prior — last dose 05/31. Cardiology cleared." },
+        { name: "Omeprazole 40mg", note: "Hold day of procedure." }
+      ],
+      continue: [
+        { name: "Metoprolol 50mg", note: "Take morning of with sip of water." },
+        { name: "Atorvastatin 80mg", note: "Take morning of with sip of water." },
+        { name: "Lisinopril 10mg", note: "Take morning of with sip of water." }
+      ],
+      adjust: []
+    },
+    consults: [
+      { name: "GI Consultation", provider: "Dr. Chen", date: "05/15", status: "complete" },
+      { name: "Cardiology Clearance", provider: "Dr. Patel", date: "05/14", status: "complete" }
+    ],
+    labs: [
+      { name: "Glucose", value: "102 mg/dL", flag: "H", note: "Slightly elevated" },
+      { name: "PT/INR", value: "1.1", flag: null, note: "Normal — confirms Plavix hold effective" }
+    ],
+    equipment: [
+      { item: "Hemostatic clips", reason: "Antiplatelet patient — bleeding risk" },
+      { item: "Epinephrine injection (1:10,000)", reason: "Backup hemostasis for biopsy sites" }
+    ],
+    roles: {
+      coordinator: [
+        { text: "Confirm Plavix held since 05/31 (5 days)", source: "Cardiology Clearance", why: "Required hold period for coronary stent patient", priority: "urgent" },
+        { text: "Verify patient NPO status from midnight", source: "Pre-procedure orders", why: "Standard EGD requirement", priority: "standard" },
+        { text: "Confirm cardiology clearance on file (Dr. Patel, 05/14)", source: "Consult tracking", why: "Required for antiplatelet hold in stent patient", priority: "important" },
+        { text: "Arrange CPAP equipment for recovery", source: "Problem list — OSA", why: "Moderate OSA requires CPAP post-sedation", priority: "important" },
+        { text: "Confirm ride home / responsible adult post-sedation", source: "Sedation protocol", why: "Standard for procedural sedation", priority: "standard" },
+        { text: "Call patient evening before — NPO reminder, arrival time, medication instructions", source: "Pre-procedure protocol", why: "Standard pre-procedure patient communication", priority: "standard" }
+      ],
+      nurse_day_of: [
+        { text: "Verify Plavix last dose was 05/31 (verbally confirm with patient)", source: "Medication reconciliation", why: "Cardiology-cleared 5-day hold for stent patient", priority: "urgent" },
+        { text: "Confirm NPO since midnight", source: "Pre-procedure orders", why: "Required for sedation safety", priority: "standard" },
+        { text: "Place IV access — standard 20G", source: "Procedure orders", why: "Required for sedation and emergency access", priority: "standard" },
+        { text: "Verify hemostatic clips and epinephrine in room", source: "Protocol deviation", why: "Antiplatelet patient — bleeding risk at biopsy sites", priority: "urgent" },
+        { text: "Document CPAP settings, ensure CPAP in recovery bay", source: "Problem list — OSA", why: "Post-sedation airway protection", priority: "important" },
+        { text: "Review allergies: Penicillin (mild), Shellfish (moderate)", source: "Allergy list", why: "Pre-procedure safety verification", priority: "standard" },
+        { text: "Standard pre-procedure verifications: ID band, consent, site marking (N/A for EGD), H&P on chart", source: "Universal protocol", why: "Standard safety checks", priority: "standard" }
+      ],
+      anesthesia: [
+        { text: "ASA Class III — coronary stent, OSA, HTN", source: "Problem list", why: "Sedation risk stratification", priority: "important" },
+        { text: "OSA: Moderate — plan for extended PACU monitoring, CPAP in recovery", source: "Problem list", why: "Post-sedation airway risk", priority: "important" },
+        { text: "Antiplatelet held (Plavix) — bleeding risk if emergent intervention needed", source: "Medication history", why: "Intra-procedure risk awareness", priority: "important" },
+        { text: "Allergies: Penicillin (rash), Shellfish (hives) — no anesthesia contraindications", source: "Allergy list", why: "Medication safety", priority: "standard" },
+        { text: "Continue metoprolol morning of — manage hemodynamics", source: "Pre-procedure orders", why: "Beta-blocker continuation for cardiac protection", priority: "standard" }
+      ],
+      surgeon: [
+        { text: "Plavix held 5 days (since 05/31) — cardiology cleared", source: "Cardiology consult (Dr. Patel)", why: "Safe to proceed with biopsy", priority: "important" },
+        { text: "Hemostatic clips and epinephrine injection available in room", source: "Protocol deviation", why: "Backup hemostasis — recent antiplatelet use", priority: "urgent" },
+        { text: "Patient has moderate OSA — CPAP needed in recovery", source: "Problem list", why: "Post-sedation airway management", priority: "standard" },
+        { text: "Indication: GERD evaluation with biopsy — assess for Barrett's, H. pylori", source: "Clinical indication", why: "Procedure planning", priority: "standard" }
+      ]
+    },
+    readiness: [
+      { category: "Medications", item: "Plavix held since 05/31 (5-day hold confirmed)", checked: true },
+      { category: "Medications", item: "Omeprazole held day of", checked: false },
+      { category: "Medications", item: "Morning meds taken (metoprolol, atorvastatin, lisinopril)", checked: false },
+      { category: "Consults", item: "GI Consultation complete (Dr. Chen, 05/15)", checked: true },
+      { category: "Consults", item: "Cardiology Clearance complete (Dr. Patel, 05/14)", checked: true },
+      { category: "Labs", item: "PT/INR within normal limits (1.1)", checked: true },
+      { category: "Labs", item: "CBC reviewed", checked: true },
+      { category: "Consent", item: "Procedure consent signed (EGD with biopsy)", checked: true },
+      { category: "Consent", item: "Sedation consent signed", checked: false },
+      { category: "Authorization", item: "Insurance authorization confirmed", checked: true },
+      { category: "Equipment", item: "Hemostatic clips in procedure room", checked: false },
+      { category: "Equipment", item: "Epinephrine injection available", checked: false },
+      { category: "Equipment", item: "CPAP available for recovery", checked: false },
+      { category: "Patient Prep", item: "NPO status confirmed", checked: false },
+      { category: "Patient Prep", item: "IV access placed", checked: false },
+      { category: "Patient Prep", item: "Responsible adult for discharge confirmed", checked: true }
+    ]
+  },
+  {
+    name: "Thompson, Margaret A",
+    mrn: "MRN-01293847",
+    age: 70,
+    sex: "Female",
+    procedure: "Total Knee Arthroplasty, Right",
+    procedureShort: "TKA",
+    date: "2026-06-12 @ 07:00",
+    provider: "Dr. James Wright, MD — Orthopedic Surgery",
+    emergency_contact: "Jessica Thompson (Daughter) - (858) 555-6677",
+    allergies: [
+      { agent: "Sulfonamide antibiotics", reaction: "ANAPHYLAXIS", severity: "Severe" },
+      { agent: "Latex", reaction: "Contact dermatitis", severity: "Moderate" },
+      { agent: "Iodinated contrast dye", reaction: "Bronchospasm", severity: "Moderate" }
+    ],
+    medications: [
+      { name: "Warfarin", dose: "5mg", alert: "HIGH ALERT - anticoagulant" },
+      { name: "Metformin", dose: "1000mg", alert: null },
+      { name: "Lisinopril", dose: "20mg", alert: null },
+      { name: "Atorvastatin", dose: "40mg", alert: null },
+      { name: "Insulin glargine (Lantus)", dose: "22 units", alert: "HIGH ALERT - insulin" },
+      { name: "Acetaminophen", dose: "1000mg PRN", alert: null }
+    ],
+    problems: ["Right knee osteoarthritis", "Type 2 Diabetes Mellitus", "Hypertension", "Atrial fibrillation", "Hyperlipidemia", "History of DVT (2019)", "Morbid obesity (BMI 35.7)"],
+    alerts: [
+      { title: "SEVERE ALLERGY: Sulfonamide — ANAPHYLAXIS", detail: "Cannot use cefazolin (sulfa cross-reactivity risk). Use vancomycin for surgical prophylaxis." },
+      { title: "HIGH-ALERT MEDICATION: Warfarin", detail: "Anticoagulant — requires 5-day hold with Lovenox bridging. Last Lovenox evening 06/10." },
+      { title: "HIGH-ALERT MEDICATION: Insulin Glargine (Lantus)", detail: "Half dose (11u) night before surgery. NO insulin morning of. Monitor glucose closely." },
+      { title: "LATEX ALLERGY", detail: "All equipment must be latex-free. First case of the day preferred." }
+    ],
+    protocol_deviations: [
+      { title: "LATEX-FREE PROTOCOL", detail: "All gloves, tubing, catheters, and tourniquets must be non-latex. Ensure latex-free cart in OR." },
+      { title: "ANTIBIOTIC SUBSTITUTION", detail: "Cannot use cefazolin (sulfa cross-reactivity risk). Use vancomycin 1g IV for surgical prophylaxis. Requires 1-hour infusion pre-incision." },
+      { title: "EXTENDED VTE PROPHYLAXIS", detail: "4 weeks post-op (not standard 2 weeks). Patient has history of DVT (2019) — increased clot risk." }
+    ],
+    med_plan: {
+      hold: [
+        { name: "Warfarin 5mg", note: "Hold 5 days prior — last dose 06/07. Bridge with Lovenox." },
+        { name: "Metformin 1000mg", note: "Hold 48 hours before surgery (renal/lactic acidosis risk)." },
+        { name: "Lovenox (bridge)", note: "Last dose evening 06/10 (36h before procedure)." }
+      ],
+      continue: [
+        { name: "Lisinopril 20mg", note: "Take morning of with sip of water." },
+        { name: "Atorvastatin 40mg", note: "Take morning of with sip of water." }
+      ],
+      adjust: [
+        { name: "Insulin glargine (Lantus)", note: "HALF dose (11u) night before. NO dose morning of surgery." }
+      ]
+    },
+    consults: [
+      { name: "Orthopedic Pre-Op", provider: "Dr. Wright", date: "05/20", status: "complete" },
+      { name: "Hematology", provider: "Dr. Williams", date: "05/22", status: "complete" },
+      { name: "Endocrinology", provider: "Dr. Sharma", date: "05/23", status: "complete" },
+      { name: "Nursing Assessment", provider: "RN Cooper", date: "05/28", status: "complete" }
+    ],
+    labs: [
+      { name: "Creatinine", value: "1.2 mg/dL", flag: "H", note: "Mildly elevated — monitor renal function" },
+      { name: "Glucose (fasting)", value: "156 mg/dL", flag: "H", note: "Poorly controlled — peri-op glucose protocol" },
+      { name: "HbA1c", value: "7.8%", flag: "H", note: "Above target — endocrinology aware" },
+      { name: "INR", value: "2.3", flag: null, note: "Therapeutic on warfarin — will normalize with hold" }
+    ],
+    equipment: [
+      { item: "Latex-free cart (complete)", reason: "Latex allergy — contact dermatitis" },
+      { item: "Hemostatic equipment", reason: "Anticoagulant patient — bridging off warfarin" },
+      { item: "Bariatric equipment if needed", reason: "BMI 35.7 — morbid obesity" }
+    ],
+    roles: {
+      coordinator: [
+        { text: "Confirm warfarin held since 06/07 and Lovenox bridging started", source: "Hematology consult (Dr. Williams)", why: "Required anticoagulation management for AFib patient", priority: "urgent" },
+        { text: "Verify last Lovenox dose evening 06/10", source: "Hematology protocol", why: "36-hour washout needed pre-surgery", priority: "urgent" },
+        { text: "Confirm MRSA decolonization completed (5-day protocol)", source: "Surgical protocol", why: "Infection prevention for joint replacement", priority: "important" },
+        { text: "Verify Hibiclens shower completed (night before + morning of)", source: "Surgical protocol", why: "Skin prep — infection prevention", priority: "important" },
+        { text: "Arrange latex-free OR setup — confirm with OR charge nurse", source: "Allergy list", why: "Latex contact dermatitis — all equipment must be non-latex", priority: "urgent" },
+        { text: "Schedule as FIRST CASE (latex allergy protocol)", source: "OR protocol", why: "Minimize airborne latex particles from prior cases", priority: "important" },
+        { text: "Confirm Type & Crossmatch for 2 units PRBCs ordered", source: "Pre-op orders", why: "TKA in anticoagulated patient — higher bleeding risk", priority: "important" },
+        { text: "Call patient: NPO midnight, arrive 05:00, Lantus half dose night before, NO Lantus morning of", source: "Pre-procedure orders", why: "Complex medication instructions for diabetic patient", priority: "important" },
+        { text: "Verify vancomycin ordered (not cefazolin) for surgical prophylaxis", source: "Allergy — sulfonamide", why: "Cefazolin contraindicated due to sulfa cross-reactivity", priority: "urgent" }
+      ],
+      nurse_day_of: [
+        { text: "LATEX-FREE PROTOCOL: Verify all equipment non-latex before patient enters room", source: "Allergy list", why: "Documented latex contact dermatitis", priority: "urgent" },
+        { text: "Verify last warfarin 06/07, last Lovenox evening 06/10", source: "Medication reconciliation", why: "Confirm adequate anticoagulant washout", priority: "urgent" },
+        { text: "Check fasting glucose on arrival — initiate insulin sliding scale if >180", source: "Endocrinology orders", why: "Type 2 DM, last HbA1c 7.8% — peri-op glucose management", priority: "important" },
+        { text: "Confirm Lantus half dose (11u) given night before, NO dose this morning", source: "Pre-procedure orders", why: "Prevent hypoglycemia while fasting", priority: "important" },
+        { text: "Start vancomycin 1g IV — must begin 1 hour before incision time", source: "Surgical prophylaxis orders", why: "Slow infusion required; cannot use cefazolin (sulfa allergy)", priority: "urgent" },
+        { text: "Place IV — use non-latex tourniquet", source: "Allergy protocol", why: "Latex-free protocol", priority: "important" },
+        { text: "Verify Type & Crossmatch completed for 2u PRBCs", source: "Pre-op orders", why: "Anticoagulated patient — higher surgical bleeding risk", priority: "important" },
+        { text: "Standard pre-op verifications: ID band, consent, surgical site marked (RIGHT knee), H&P on chart", source: "Universal protocol", why: "Standard safety checks — note laterality", priority: "standard" },
+        { text: "Apply SCDs — DVT history requires early VTE prophylaxis", source: "Problem list", why: "History of DVT 2019, currently off anticoagulation", priority: "important" }
+      ],
+      anesthesia: [
+        { text: "Surgical antibiotic: Vancomycin 1g IV (NOT cefazolin — sulfa allergy)", source: "Allergy list / Pharmacy", why: "Anaphylaxis risk with sulfonamides, cross-reactivity with cefazolin", priority: "urgent" },
+        { text: "LATEX-FREE anesthesia circuit and supplies required", source: "Allergy list", why: "Documented latex allergy", priority: "urgent" },
+        { text: "NO iodinated contrast if imaging needed intra-op", source: "Allergy list", why: "Documented bronchospasm reaction", priority: "important" },
+        { text: "BMI 35.7 — potential difficult airway, position considerations", source: "Problem list", why: "Morbid obesity — airway and positioning planning", priority: "important" },
+        { text: "Monitor glucose q1h intra-op — sliding scale insulin available", source: "Endocrinology consult", why: "Type 2 DM, poorly controlled, fasting", priority: "important" },
+        { text: "AFib — rate control, avoid dehydration", source: "Problem list", why: "Hemodynamic management", priority: "standard" },
+        { text: "DVT history — ensure SCDs applied before induction", source: "Problem list", why: "VTE prevention in high-risk patient", priority: "important" }
+      ],
+      surgeon: [
+        { text: "Order extended VTE prophylaxis (4 weeks post-op, not standard 2)", source: "Hematology consult (Dr. Williams)", why: "DVT history 2019 — elevated recurrence risk", priority: "important" },
+        { text: "Anticoagulation: Warfarin held 5 days, bridged with Lovenox (last dose evening 06/10)", source: "Hematology protocol", why: "INR should be normalizing — confirm pre-op INR", priority: "important" },
+        { text: "Confirm pre-op INR result morning of surgery (target <1.5)", source: "Lab orders", why: "Ensure safe hemostasis for major joint surgery", priority: "urgent" },
+        { text: "Latex-free OR confirmed — all surgical gloves must be non-latex", source: "Allergy protocol", why: "Documented latex allergy", priority: "urgent" },
+        { text: "Surgical prophylaxis: Vancomycin (not cefazolin) — infusion starts 1h before incision", source: "Pharmacy/Allergy", why: "Sulfa cross-reactivity concern", priority: "important" },
+        { text: "Type & Crossmatch 2u PRBCs available", source: "Pre-op orders", why: "Anticipated blood loss + anticoagulated patient", priority: "standard" },
+        { text: "Post-op: resume warfarin per hematology (typically POD 1-2), overlap with Lovenox", source: "Hematology plan", why: "Bridge back to therapeutic anticoagulation for AFib", priority: "important" }
+      ]
+    },
+    readiness: [
+      { category: "Medications", item: "Warfarin held since 06/07 (5-day hold)", checked: true },
+      { category: "Medications", item: "Lovenox bridging completed (last dose evening 06/10)", checked: false },
+      { category: "Medications", item: "Metformin held 48 hours prior", checked: false },
+      { category: "Medications", item: "Lantus half dose (11u) night before surgery", checked: false },
+      { category: "Consults", item: "Orthopedic Pre-Op complete (Dr. Wright, 05/20)", checked: true },
+      { category: "Consults", item: "Hematology complete (Dr. Williams, 05/22)", checked: true },
+      { category: "Consults", item: "Endocrinology complete (Dr. Sharma, 05/23)", checked: true },
+      { category: "Consults", item: "Nursing Assessment complete (RN Cooper, 05/28)", checked: true },
+      { category: "Labs", item: "Pre-op INR confirmed <1.5 (morning of)", checked: false },
+      { category: "Labs", item: "Fasting glucose checked on arrival", checked: false },
+      { category: "Labs", item: "Type & Crossmatch 2u PRBCs confirmed", checked: false },
+      { category: "Consent", item: "Surgical consent signed (TKA Right)", checked: true },
+      { category: "Consent", item: "Anesthesia consent signed", checked: false },
+      { category: "Authorization", item: "Insurance prior authorization confirmed", checked: true },
+      { category: "Discharge", item: "Rehab facility bed confirmed", checked: false },
+      { category: "Discharge", item: "Post-op VTE prophylaxis plan documented (4 weeks)", checked: true },
+      { category: "Equipment", item: "Latex-free OR cart confirmed", checked: false },
+      { category: "Equipment", item: "Hemostatic equipment available", checked: false },
+      { category: "Equipment", item: "Bariatric positioning equipment confirmed", checked: false },
+      { category: "Patient Prep", item: "MRSA decolonization completed (5-day)", checked: true },
+      { category: "Patient Prep", item: "Hibiclens shower (night before + morning of)", checked: false },
+      { category: "Patient Prep", item: "NPO since midnight confirmed", checked: false },
+      { category: "Patient Prep", item: "Arrived by 05:00", checked: false },
+      { category: "Patient Prep", item: "Vancomycin infusion started (1h pre-incision)", checked: false },
+      { category: "Patient Prep", item: "SCDs applied", checked: false },
+      { category: "Patient Prep", item: "Surgical site marked (RIGHT knee)", checked: false }
+    ]
+  }
+];
+
+// ============ APP STATE ============
+let currentPatient = 0;
+let currentTab = 'preop';
+let currentRole = 'coordinator';
+
+// ============ RENDER FUNCTIONS ============
+function renderBanner() {
+  const p = patients[currentPatient];
+  document.getElementById('patientBanner').innerHTML = `
+    <div class="banner-item"><span class="banner-label">Patient:</span><span class="banner-value">${p.name}</span></div>
+    <div class="banner-item"><span class="banner-label">MRN:</span><span class="banner-value">${p.mrn}</span></div>
+    <div class="banner-item"><span class="banner-label">Age/Sex:</span><span class="banner-value">${p.age}${p.sex[0]}</span></div>
+    <div class="banner-item"><span class="banner-label">Procedure:</span><span class="banner-value">${p.procedureShort}</span></div>
+    <div class="banner-item"><span class="banner-label">Date:</span><span class="banner-value">${p.date}</span></div>
+    <div class="banner-item"><span class="banner-label">Provider:</span><span class="banner-value">${p.provider}</span></div>
+  `;
+}
+
+function renderPreOp() {
+  const p = patients[currentPatient];
+  let html = '';
+
+  // Alerts
+  if (p.alerts.length) {
+    html += `<div class="card"><h3>Critical Alerts</h3>`;
+    p.alerts.forEach(a => {
+      html += `<div class="alert-card"><div class="alert-title">${a.title}</div><div class="alert-detail">${a.detail}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Protocol Deviations
+  if (p.protocol_deviations.length) {
+    html += `<div class="card"><h3>How This Patient Differs From Standard Protocol</h3>`;
+    p.protocol_deviations.forEach(d => {
+      html += `<div class="deviation-card"><div class="deviation-title">${d.title}</div><div class="deviation-detail">${d.detail}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Medication Management
+  html += `<div class="card"><h3>Medication Management</h3><div class="med-columns">`;
+  html += `<div class="med-col hold"><h4>HOLD</h4>`;
+  p.med_plan.hold.forEach(m => {
+    html += `<div class="med-item"><div class="med-name">${m.name}</div><div class="med-note">${m.note}</div></div>`;
+  });
+  html += `</div>`;
+  html += `<div class="med-col continue"><h4>CONTINUE</h4>`;
+  p.med_plan.continue.forEach(m => {
+    html += `<div class="med-item"><div class="med-name">${m.name}</div><div class="med-note">${m.note}</div></div>`;
+  });
+  html += `</div>`;
+  html += `<div class="med-col adjust"><h4>ADJUST</h4>`;
+  if (p.med_plan.adjust.length === 0) {
+    html += `<div class="med-item" style="color:#94a3b8;font-style:italic;">None</div>`;
+  } else {
+    p.med_plan.adjust.forEach(m => {
+      html += `<div class="med-item"><div class="med-name">${m.name}</div><div class="med-note">${m.note}</div></div>`;
+    });
+  }
+  html += `</div></div></div>`;
+
+  // Consults
+  html += `<div class="card"><h3>Required Consults</h3>`;
+  p.consults.forEach(c => {
+    html += `<div class="consult-item"><div><strong>${c.name}</strong> — ${c.provider} (${c.date})</div><span class="consult-status ${c.status}">${c.status === 'complete' ? 'Complete' : 'Pending'}</span></div>`;
+  });
+  html += `</div>`;
+
+  // Labs
+  html += `<div class="card"><h3>Flagged Lab Values</h3>`;
+  p.labs.forEach(l => {
+    html += `<div class="lab-item"><span><strong>${l.name}:</strong> ${l.value}</span>${l.flag ? `<span class="lab-flag">${l.flag}</span>` : ''}<span style="font-size:0.7rem;color:#64748b;">${l.note}</span></div>`;
+  });
+  html += `</div>`;
+
+  // Equipment
+  html += `<div class="card"><h3>Equipment Additions (Beyond Standard Kit)</h3>`;
+  p.equipment.forEach(e => {
+    html += `<div class="equip-item"><strong>${e.item}</strong><div class="equip-reason">${e.reason}</div></div>`;
+  });
+  html += `</div>`;
+
+  document.getElementById('tab-preop').innerHTML = html;
+}
+
+function renderRoles() {
+  const p = patients[currentPatient];
+  const roles = [
+    { id: 'coordinator', label: 'Pre-Op Coordinator' },
+    { id: 'nurse_day_of', label: 'Pre-Op Nurse (Day-Of)' },
+    { id: 'anesthesia', label: 'Anesthesia' },
+    { id: 'surgeon', label: 'Surgeon' }
+  ];
+
+  let html = `<div class="role-selector">`;
+  roles.forEach(r => {
+    html += `<input type="radio" class="role-radio" name="role" id="role-${r.id}" value="${r.id}" ${r.id === currentRole ? 'checked' : ''}>`;
+    html += `<label class="role-label" for="role-${r.id}">${r.label}</label>`;
+  });
+  html += `</div>`;
+
+  roles.forEach(r => {
+    const actions = p.roles[r.id];
+    html += `<div class="role-content ${r.id === currentRole ? 'active' : ''}" id="rolecontent-${r.id}">`;
+    html += `<div class="section-title">${r.label} — Action Items</div>`;
+    if (r.id === 'coordinator' || r.id === 'nurse_day_of') {
+      actions.forEach((a, i) => {
+        html += `<div class="action-item ${a.priority}">
+          <div style="display:flex;align-items:flex-start;gap:0.6rem;">
+            <input type="checkbox" id="role-check-${r.id}-${i}" style="margin-top:0.15rem;width:1rem;height:1rem;accent-color:#1e40af;cursor:pointer;">
+            <div>
+              <div class="action-text"><label for="role-check-${r.id}-${i}" style="cursor:pointer;">${a.text}</label></div>
+              <div class="action-meta">Source: ${a.source} | Why: ${a.why}</div>
+            </div>
+          </div>
+        </div>`;
+      });
+    } else {
+      actions.forEach(a => {
+        html += `<div class="action-item ${a.priority}">
+          <div class="action-text">${a.text}</div>
+          <div class="action-meta">Source: ${a.source} | Why: ${a.why}</div>
+        </div>`;
+      });
+    }
+    html += `</div>`;
+  });
+
+  document.getElementById('tab-roles').innerHTML = html;
+
+  // Attach role radio listeners
+  document.querySelectorAll('.role-radio').forEach(radio => {
+    radio.addEventListener('change', function() {
+      currentRole = this.value;
+      document.querySelectorAll('.role-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('rolecontent-' + this.value).classList.add('active');
+    });
+  });
+}
+
+function renderReadiness() {
+  const p = patients[currentPatient];
+  const groups = {};
+  p.readiness.forEach((item, i) => {
+    if (!groups[item.category]) groups[item.category] = [];
+    groups[item.category].push({ ...item, index: i });
+  });
+
+  let html = `<div class="section-title">Day-Of Readiness Checklist</div>`;
+
+  Object.keys(groups).forEach(cat => {
+    html += `<div class="checklist-group"><h4>${cat}</h4>`;
+    groups[cat].forEach(item => {
+      html += `<div class="checklist-item ${item.checked ? 'checked' : ''}" id="readiness-row-${item.index}">
+        <input type="checkbox" id="readiness-${item.index}" ${item.checked ? 'checked' : ''}>
+        <label for="readiness-${item.index}">${item.item}</label>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `<div class="progress-container">
+    <div class="progress-header">
+      <span class="progress-label">Readiness Progress</span>
+      <span class="progress-count" id="progress-count"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div style="text-align:center;"><span class="readiness-status" id="readiness-badge"></span></div>
+  </div>`;
+
+  document.getElementById('tab-readiness').innerHTML = html;
+
+  // Attach listeners
+  document.querySelectorAll('[id^="readiness-"]:not([id^="readiness-row-"]):not([id="readiness-badge"])').forEach(cb => {
+    if (cb.tagName === 'INPUT') {
+      cb.addEventListener('change', function() {
+        const idx = parseInt(this.id.replace('readiness-', ''));
+        patients[currentPatient].readiness[idx].checked = this.checked;
+        const row = document.getElementById('readiness-row-' + idx);
+        if (this.checked) row.classList.add('checked');
+        else row.classList.remove('checked');
+        updateProgress();
+      });
+    }
+  });
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const p = patients[currentPatient];
+  const total = p.readiness.length;
+  const done = p.readiness.filter(r => r.checked).length;
+  const pct = Math.round((done / total) * 100);
+
+  document.getElementById('progress-count').textContent = `${done} / ${total} confirmed`;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const badge = document.getElementById('readiness-badge');
+  if (pct === 100) {
+    badge.textContent = 'Ready';
+    badge.className = 'readiness-status ready';
+  } else if (pct >= 70) {
+    badge.textContent = 'Nearly Ready';
+    badge.className = 'readiness-status nearly';
+  } else {
+    badge.textContent = 'Not Ready';
+    badge.className = 'readiness-status not-ready';
+  }
+}
+
+// ============ TAB SWITCHING ============
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    const tab = this.getAttribute('data-tab');
+    currentTab = tab;
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+// ============ PATIENT SWITCHING ============
+document.getElementById('patientSelect').addEventListener('change', function() {
+  currentPatient = parseInt(this.value);
+  renderAll();
+});
+
+// ============ INIT ============
+function renderAll() {
+  renderBanner();
+  renderPreOp();
+  renderRoles();
+  renderReadiness();
+}
+
+renderAll();
+</script>
+</body>
+</html>

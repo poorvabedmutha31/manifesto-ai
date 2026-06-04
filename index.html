@@ -23,6 +23,7 @@
         nav {
             position: fixed; top: 0; left: 0; right: 0;
             background: rgba(255,255,255,0.95);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #e5e7eb;
             z-index: 100;
@@ -38,6 +39,12 @@
             font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
         }
         nav .nav-links a:hover { color: #1e40af; }
+        nav .nav-links a.page-link {
+            color: #1e40af; font-weight: 600;
+            border: 1px solid #1e40af; border-radius: 4px;
+            padding: 0.3rem 0.7rem;
+        }
+        nav .nav-links a.page-link:hover { background: #1e40af; color: white; }
 
         /* Hero / Title Slide */
         .hero {
@@ -219,6 +226,8 @@
             <a href="#how">How It Works</a>
             <a href="#example">Example</a>
             <a href="#market">Market</a>
+            <a href="clinical.html" class="page-link">Clinical App</a>
+            <a href="impact.html" class="page-link">Impact & Business</a>
         </div>
     </div>
 </nav>
@@ -232,7 +241,7 @@
             We don't replace Epic. We read it &mdash; and generate the synthesis that
             currently lives in sticky notes and the surgeon's head.
         </p>
-        <div class="badge">SoPA Hackathon &bull; UC San Diego &bull; 2026</div>
+        <div class="badge">SoPE Hackathon &bull; UC San Diego &bull; 2026</div>
     </div>
 </section>
 
@@ -548,7 +557,7 @@
 </section>
 
 <footer>
-    <p>Manifesto AI &bull; Pre-Procedure Intelligence &bull; SoPA Hackathon &bull; UC San Diego &bull; 2026</p>
+    <p>Manifesto AI &bull; Pre-Procedure Intelligence &bull; SoPE Hackathon &bull; UC San Diego &bull; 2026</p>
 </footer>
 
 </body>

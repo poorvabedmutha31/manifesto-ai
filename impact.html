@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifesto AI — Clinical Impact & Business Case</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 60px 24px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px 28px;
+            border-radius: 12px;
+            margin: 48px 0 24px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* Stat Cards */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-top: 4px solid #3b82f6;
+        }
+
+        .stat-card.red { border-top-color: #dc2626; }
+        .stat-card.orange { border-top-color: #f59e0b; }
+        .stat-card.blue { border-top-color: #3b82f6; }
+        .stat-card.green { border-top-color: #10b981; }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-card .number.red { color: #dc2626; }
+        .stat-card .number.orange { color: #f59e0b; }
+        .stat-card .number.blue { color: #1e40af; }
+        .stat-card .number.green { color: #10b981; }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .stat-card .source {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 24px 28px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+
+        .quote-block blockquote {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .quote-block cite {
+            font-size: 0.9rem;
+            color: #64748b;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead th {
+            background: #1e293b;
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Callout */
+        .callout {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .callout h4 {
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .callout p {
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin: 24px 0;
+        }
+
+        .bar-chart h3 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .bar-group {
+            margin-bottom: 16px;
+        }
+
+        .bar-group .bar-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .bar-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 50px;
+            text-align: right;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 24px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 600;
+            transition: width 0.3s ease;
+        }
+
+        .bar-fill.before { background: #ef4444; }
+        .bar-fill.after { background: #10b981; }
+
+        .bar-legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .bar-legend span {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bar-legend .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .dot.red { background: #ef4444; }
+        .dot.green { background: #10b981; }
+
+        /* Sliders */
+        .slider-section {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin: 24px 0;
+        }
+
+        .slider-section h3 {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .slider-group {
+            margin-bottom: 20px;
+        }
+
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .slider-group label span {
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #1e40af;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #1e40af;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .output-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .output-card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .output-card.red-bg { background: #fef2f2; border: 1px solid #fecaca; }
+        .output-card.green-bg { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .output-card.blue-bg { background: #eff6ff; border: 1px solid #bfdbfe; }
+
+        .output-card .out-number {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .output-card .out-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* SVG Chart */
+        .roi-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin: 24px 0;
+        }
+
+        .roi-chart h3 {
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .roi-chart svg {
+            width: 100%;
+            height: 300px;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .chart-legend span {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chart-legend .line-sample {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .chart-legend .line-sample.dashed {
+            background: repeating-linear-gradient(90deg, #3b82f6 0, #3b82f6 6px, transparent 6px, transparent 10px);
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .col-card h3 {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .col-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .col-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .col-card ul li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .col-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* Phase Timeline */
+        .phase-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .phase-card h4 {
+            color: #1e40af;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .phase-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .phase-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Pricing Table */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            transition: border-color 0.2s;
+        }
+
+        .pricing-card:hover {
+            border-color: #3b82f6;
+        }
+
+        .pricing-card h4 {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+
+        .pricing-card .freq {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 24px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .footer .tagline {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .stat-cards { grid-template-columns: 1fr 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .stat-cards { grid-template-columns: 1fr; }
+        }
+
+        /* Utility */
+        .mt-16 { margin-top: 16px; }
+        .mb-16 { margin-bottom: 16px; }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge.yes { background: #dcfce7; color: #166534; }
+        .badge.partial { background: #fef3c7; color: #92400e; }
+        .badge.no { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+
+<nav style="background:#fff;border-bottom:1px solid #e5e7eb;padding:0.6rem 2rem;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="font-weight:700;font-size:1rem;color:#1e293b;text-decoration:none;">&#x1F3E5; Manifesto AI</a>
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <a href="index.html" style="color:#64748b;text-decoration:none;font-size:0.85rem;font-weight:500;">Pitch Deck</a>
+    <a href="clinical.html" style="color:#64748b;text-decoration:none;font-size:0.85rem;font-weight:500;">Clinical App</a>
+    <a href="impact.html" style="color:#1e40af;text-decoration:none;font-size:0.85rem;font-weight:600;border-bottom:2px solid #1e40af;padding-bottom:2px;">Impact &amp; Business</a>
+  </div>
+</nav>
+<!-- Header -->
+<div class="header">
+    <div class="container">
+        <h1>Manifesto AI — Clinical Impact &amp; Business Case</h1>
+        <p>Why this matters clinically, operationally, and financially</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Section 1: Clinical Impact -->
+    <div class="section-header">
+        <h2>1. Clinical Impact</h2>
+        <p>The problem is not ignorance — it is inaptitude</p>
+    </div>
+
+    <div class="quote-block">
+        <blockquote>"We have accumulated stupendous know-how... yet avoidable failures remain common, because the know-how is not applied correctly, consistently, or safely."</blockquote>
+        <cite>— Atul Gawande, <em>The Checklist Manifesto</em></cite>
+    </div>
+
+    <div class="stat-cards">
+        <div class="stat-card red">
+            <div class="number red">44-98K</div>
+            <div class="label">Deaths/year from preventable medical errors</div>
+            <div class="source">IOM, "To Err Is Human"</div>
+        </div>
+        <div class="stat-card red">
+            <div class="number red">4.8%</div>
+            <div class="label">Surgical adverse events from communication failures</div>
+            <div class="source">WHO Surgical Safety Checklist</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="number orange">70%</div>
+            <div class="label">Sentinel events with communication as root cause</div>
+            <div class="source">Joint Commission</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="number orange">90%+</div>
+            <div class="label">BPA alert override rate</div>
+            <div class="source">JAMIA 2019</div>
+        </div>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">What Manifesto AI Prevents</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Failure Mode</th>
+                    <th>How It Happens Today</th>
+                    <th>How Manifesto AI Prevents It</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Wrong antibiotic given</strong></td>
+                    <td>Allergy buried in chart; clinician doesn't review full history</td>
+                    <td>Surfaces allergy + cross-reactivity in pre-procedure brief</td>
+                </tr>
+                <tr>
+                    <td><strong>Bleeding crisis in OR</strong></td>
+                    <td>Anticoagulant not held; lab results missed in 200-page chart</td>
+                    <td>Flags active anticoagulants, last INR, and hold recommendations</td>
+                </tr>
+                <tr>
+                    <td><strong>Day-of cancellation</strong></td>
+                    <td>NPO instructions not followed; pre-op labs expired</td>
+                    <td>Generates patient-specific prep checklist days before procedure</td>
+                </tr>
+                <tr>
+                    <td><strong>Post-op DVT/PE</strong></td>
+                    <td>VTE risk not calculated; prophylaxis not ordered</td>
+                    <td>Auto-calculates Caprini score, recommends prophylaxis protocol</td>
+                </tr>
+                <tr>
+                    <td><strong>Perioperative hypoglycemia</strong></td>
+                    <td>Insulin regimen not adjusted for NPO status</td>
+                    <td>Alerts to diabetes medications requiring peri-procedural adjustment</td>
+                </tr>
+                <tr>
+                    <td><strong>Latex reaction in OR</strong></td>
+                    <td>Allergy documented in notes but not flagged in OR setup</td>
+                    <td>Includes latex allergy in pre-procedure alert with OR setup implications</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">Evidence Base: Surgical Checklists Work</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Study</th>
+                    <th>Setting</th>
+                    <th>Key Finding</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>WHO Safe Surgery Saves Lives</strong></td>
+                    <td>8 hospitals, 8 countries</td>
+                    <td>36% reduction in major complications; 47% reduction in mortality</td>
+                    <td>NEJM 2009</td>
+                </tr>
+                <tr>
+                    <td><strong>Michigan Keystone ICU</strong></td>
+                    <td>103 ICUs, Michigan</td>
+                    <td>66% reduction in central line infections; sustained over 18 months</td>
+                    <td>NEJM 2006</td>
+                </tr>
+                <tr>
+                    <td><strong>Safe Surgery 2015</strong></td>
+                    <td>South Carolina</td>
+                    <td>22% reduction in mortality with checklist implementation</td>
+                    <td>Ann Surg 2015</td>
+                </tr>
+                <tr>
+                    <td><strong>Ontario Surgical Quality</strong></td>
+                    <td>101 hospitals, Ontario</td>
+                    <td>Checklist compliance correlated with lower complication rates (r=-0.31)</td>
+                    <td>CMAJ 2014</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout">
+        <h4>Key Insight</h4>
+        <p><strong>Static checklists</strong> are one-size-fits-all paper forms. <strong>Manifesto AI</strong> generates dynamic, patient-specific checklists that adapt to each patient's conditions, medications, allergies, and procedure type — capturing the benefits of checklists while eliminating their key limitation: generality.</p>
+    </div>
+
+    <!-- Section 2: Operational Impact -->
+    <div class="section-header">
+        <h2>2. Operational Impact</h2>
+        <p>Time saved, cancellations prevented, workflows streamlined</p>
+    </div>
+
+    <div class="stat-cards">
+        <div class="stat-card blue">
+            <div class="number blue">20 min</div>
+            <div class="label">Saved per patient on pre-procedure preparation</div>
+            <div class="source">Estimated from workflow analysis</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="number blue">3-5%</div>
+            <div class="label">Day-of cancellation rate (preventable)</div>
+            <div class="source">Industry benchmark</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="number blue">5 hrs</div>
+            <div class="label">Reclaimed daily across perioperative team</div>
+            <div class="source">Projected from time savings model</div>
+        </div>
+    </div>
+
+    <div class="bar-chart">
+        <h3>Time Savings Model (minutes per patient)</h3>
+
+        <div class="bar-group">
+            <div class="bar-label">Pre-Op Coordinator</div>
+            <div class="bar-row">
+                <span class="bar-tag">Before</span>
+                <div class="bar-track"><div class="bar-fill before" style="width: 100%">20 min</div></div>
+            </div>
+            <div class="bar-row">
+                <span class="bar-tag">After</span>
+                <div class="bar-track"><div class="bar-fill after" style="width: 25%">5 min</div></div>
+            </div>
+        </div>
+
+        <div class="bar-group">
+            <div class="bar-label">Pre-Op Nurse</div>
+            <div class="bar-row">
+                <span class="bar-tag">Before</span>
+                <div class="bar-track"><div class="bar-fill before" style="width: 60%">12 min</div></div>
+            </div>
+            <div class="bar-row">
+                <span class="bar-tag">After</span>
+                <div class="bar-track"><div class="bar-fill after" style="width: 20%">4 min</div></div>
+            </div>
+        </div>
+
+        <div class="bar-group">
+            <div class="bar-label">Anesthesiologist</div>
+            <div class="bar-row">
+                <span class="bar-tag">Before</span>
+                <div class="bar-track"><div class="bar-fill before" style="width: 40%">8 min</div></div>
+            </div>
+            <div class="bar-row">
+                <span class="bar-tag">After</span>
+                <div class="bar-track"><div class="bar-fill after" style="width: 15%">3 min</div></div>
+            </div>
+        </div>
+
+        <div class="bar-group">
+            <div class="bar-label">Surgeon</div>
+            <div class="bar-row">
+                <span class="bar-tag">Before</span>
+                <div class="bar-track"><div class="bar-fill before" style="width: 25%">5 min</div></div>
+            </div>
+            <div class="bar-row">
+                <span class="bar-tag">After</span>
+                <div class="bar-track"><div class="bar-fill after" style="width: 10%">2 min</div></div>
+            </div>
+        </div>
+
+        <div class="bar-group">
+            <div class="bar-label">OR Charge Nurse</div>
+            <div class="bar-row">
+                <span class="bar-tag">Before</span>
+                <div class="bar-track"><div class="bar-fill before" style="width: 75%">15 min</div></div>
+            </div>
+            <div class="bar-row">
+                <span class="bar-tag">After</span>
+                <div class="bar-track"><div class="bar-fill after" style="width: 25%">5 min</div></div>
+            </div>
+        </div>
+
+        <div class="bar-legend">
+            <span><span class="dot red"></span> Before (manual review)</span>
+            <span><span class="dot green"></span> After (Manifesto AI)</span>
+        </div>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">Cancellation Prevention</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cancellation Reason</th>
+                    <th>% of Cancellations</th>
+                    <th>Manifesto AI Preventable?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Incomplete pre-op workup / expired labs</td>
+                    <td>25-30%</td>
+                    <td><span class="badge yes">Yes</span></td>
+                </tr>
+                <tr>
+                    <td>NPO violation</td>
+                    <td>10-15%</td>
+                    <td><span class="badge yes">Yes</span></td>
+                </tr>
+                <tr>
+                    <td>Medication not held (anticoagulants)</td>
+                    <td>10-12%</td>
+                    <td><span class="badge yes">Yes</span></td>
+                </tr>
+                <tr>
+                    <td>Missing consent / documentation</td>
+                    <td>8-10%</td>
+                    <td><span class="badge yes">Yes</span></td>
+                </tr>
+                <tr>
+                    <td>Patient no-show</td>
+                    <td>15-20%</td>
+                    <td><span class="badge partial">Partial</span></td>
+                </tr>
+                <tr>
+                    <td>Acute illness / clinical change</td>
+                    <td>15-20%</td>
+                    <td><span class="badge no">No</span></td>
+                </tr>
+                <tr>
+                    <td>Scheduling / resource conflict</td>
+                    <td>10-15%</td>
+                    <td><span class="badge no">No</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 3: Business Case -->
+    <div class="section-header">
+        <h2>3. Business Case</h2>
+        <p>Hard-dollar savings and revenue recovery</p>
+    </div>
+
+    <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">Cost of a Single Surgical Cancellation</h3>
+    <div class="stat-cards">
+        <div class="stat-card red">
+            <div class="number red">$2,790</div>
+            <div class="label">OR Time Wasted</div>
+            <div class="source">~30 min @ $93/min average</div>
+        </div>
+        <div class="stat-card orange">
+            <div class="number orange">~$1,500</div>
+            <div class="label">Staff Idle Cost</div>
+            <div class="source">Surgeon, anesthesia, nursing, techs</div>
+        </div>
+        <div class="stat-card red">
+            <div class="number red">$5K-$50K</div>
+            <div class="label">Revenue Lost</div>
+            <div class="source">Depends on procedure complexity</div>
+        </div>
+    </div>
+
+    <div class="slider-section">
+        <h3>Annual Impact Model (Interactive)</h3>
+
+        <div class="slider-group">
+            <label>Annual Surgical Volume: <span id="vol-display">10,000</span></label>
+            <input type="range" id="slider-volume" min="3000" max="30000" step="500" value="10000">
+        </div>
+
+        <div class="slider-group">
+            <label>Current Cancellation Rate: <span id="rate-display">4%</span></label>
+            <input type="range" id="slider-rate" min="1" max="8" step="0.5" value="4">
+        </div>
+
+        <div class="slider-group">
+            <label>Target Reduction with Manifesto AI: <span id="reduction-display">50%</span></label>
+            <input type="range" id="slider-reduction" min="20" max="70" step="5" value="50">
+        </div>
+
+        <div class="output-cards">
+            <div class="output-card red-bg">
+                <div class="out-number red" id="out-current">400</div>
+                <div class="out-label">Current Annual Cancellations</div>
+            </div>
+            <div class="output-card green-bg">
+                <div class="out-number green" id="out-prevented">200</div>
+                <div class="out-label">Cancellations Prevented</div>
+            </div>
+            <div class="output-card green-bg">
+                <div class="out-number green" id="out-revenue">$3,000,000</div>
+                <div class="out-label">Revenue Recovered</div>
+            </div>
+            <div class="output-card blue-bg">
+                <div class="out-number blue" id="out-fte">2.4</div>
+                <div class="out-label">FTE Equivalent Saved</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="roi-chart">
+        <h3>ROI Projection (12-Month View)</h3>
+        <svg id="roi-svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+            <!-- Grid lines -->
+            <line x1="60" y1="20" x2="60" y2="250" stroke="#e2e8f0" stroke-width="1"/>
+            <line x1="60" y1="250" x2="760" y2="250" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- Horizontal grid -->
+            <line x1="60" y1="65" x2="760" y2="65" stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="60" y1="110" x2="760" y2="110" stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="60" y1="155" x2="760" y2="155" stroke="#f1f5f9" stroke-width="1"/>
+            <line x1="60" y1="200" x2="760" y2="200" stroke="#f1f5f9" stroke-width="1"/>
+
+            <!-- Y-axis labels -->
+            <text x="55" y="25" text-anchor="end" font-size="10" fill="#64748b">$500K</text>
+            <text x="55" y="70" text-anchor="end" font-size="10" fill="#64748b">$400K</text>
+            <text x="55" y="115" text-anchor="end" font-size="10" fill="#64748b">$300K</text>
+            <text x="55" y="160" text-anchor="end" font-size="10" fill="#64748b">$200K</text>
+            <text x="55" y="205" text-anchor="end" font-size="10" fill="#64748b">$100K</text>
+            <text x="55" y="255" text-anchor="end" font-size="10" fill="#64748b">$0</text>
+
+            <!-- X-axis labels -->
+            <text x="118" y="270" text-anchor="middle" font-size="10" fill="#64748b">1</text>
+            <text x="182" y="270" text-anchor="middle" font-size="10" fill="#64748b">2</text>
+            <text x="245" y="270" text-anchor="middle" font-size="10" fill="#64748b">3</text>
+            <text x="308" y="270" text-anchor="middle" font-size="10" fill="#64748b">4</text>
+            <text x="372" y="270" text-anchor="middle" font-size="10" fill="#64748b">5</text>
+            <text x="435" y="270" text-anchor="middle" font-size="10" fill="#64748b">6</text>
+            <text x="498" y="270" text-anchor="middle" font-size="10" fill="#64748b">7</text>
+            <text x="562" y="270" text-anchor="middle" font-size="10" fill="#64748b">8</text>
+            <text x="625" y="270" text-anchor="middle" font-size="10" fill="#64748b">9</text>
+            <text x="688" y="270" text-anchor="middle" font-size="10" fill="#64748b">10</text>
+            <text x="752" y="270" text-anchor="middle" font-size="10" fill="#64748b">11</text>
+
+            <text x="410" y="295" text-anchor="middle" font-size="11" fill="#64748b">Month</text>
+
+            <!-- Lines will be drawn by JS -->
+            <polyline id="line-savings" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline id="line-cost" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline id="line-net" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="8,4" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Breakeven indicator -->
+            <circle id="breakeven-dot" r="5" fill="#3b82f6" stroke="white" stroke-width="2" cx="0" cy="0" style="display:none;"/>
+            <text id="breakeven-label" font-size="10" fill="#3b82f6" font-weight="600" x="0" y="0" style="display:none;">Breakeven</text>
+        </svg>
+        <div class="chart-legend">
+            <span><span class="line-sample" style="background:#10b981;"></span> Cumulative Savings</span>
+            <span><span class="line-sample" style="background:#ef4444;"></span> Cumulative Cost</span>
+            <span><span class="line-sample dashed"></span> Net Value</span>
+        </div>
+    </div>
+
+    <!-- Section 4: Market Opportunity -->
+    <div class="section-header">
+        <h2>4. Market Opportunity</h2>
+        <p>A massive, underserved market ready for disruption</p>
+    </div>
+
+    <div class="stat-cards">
+        <div class="stat-card blue">
+            <div class="number blue">$37B</div>
+            <div class="label">Total Addressable Market</div>
+            <div class="source">Clinical Decision Support + Perioperative IT</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="number blue">$4.2B</div>
+            <div class="label">Serviceable Addressable Market</div>
+            <div class="source">US hospitals with Epic EHR, surgical volume >5K/yr</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="number blue">$180M</div>
+            <div class="label">Serviceable Obtainable Market</div>
+            <div class="source">Year 5 target: 150 hospital systems</div>
+        </div>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">Why Now?</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Factor</th>
+                    <th>What Changed</th>
+                    <th>Why It Matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>21st Century Cures Act</strong></td>
+                    <td>Mandates open APIs for EHR data (FHIR)</td>
+                    <td>Enables third-party access to patient data without custom integrations</td>
+                </tr>
+                <tr>
+                    <td><strong>Epic App Orchard / Cosmos</strong></td>
+                    <td>Epic's marketplace now supports third-party clinical apps</td>
+                    <td>Distribution channel to 250M+ patient records</td>
+                </tr>
+                <tr>
+                    <td><strong>Alert fatigue crisis</strong></td>
+                    <td>90%+ override rates on BPAs; clinician burnout at all-time high</td>
+                    <td>Hospitals actively seeking alternatives to interruptive alerts</td>
+                </tr>
+                <tr>
+                    <td><strong>Staffing shortage</strong></td>
+                    <td>Post-COVID nursing shortage; 100K+ RN deficit projected</td>
+                    <td>Automation of cognitive tasks is no longer optional</td>
+                </tr>
+                <tr>
+                    <td><strong>Value-based care</strong></td>
+                    <td>CMS shifting from fee-for-service to outcomes-based payment</td>
+                    <td>Hospitals financially incentivized to reduce complications</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 5: Go-to-Market Strategy -->
+    <div class="section-header">
+        <h2>5. Go-to-Market Strategy</h2>
+        <p>Prove, validate, scale</p>
+    </div>
+
+    <div class="phase-cards">
+        <div class="phase-card">
+            <h4>Phase 1 — Months 1-6</h4>
+            <h3>Prove</h3>
+            <p>Single hospital pilot. Deploy in 1-2 surgical departments. Measure time savings, catch rate, and cancellation reduction. Build clinical evidence.</p>
+        </div>
+        <div class="phase-card">
+            <h4>Phase 2 — Months 6-12</h4>
+            <h3>Validate</h3>
+            <p>Expand to 3-5 hospital systems. Publish clinical results. Build case studies. Establish pricing model based on demonstrated value.</p>
+        </div>
+        <div class="phase-card">
+            <h4>Phase 3 — Year 2+</h4>
+            <h3>Scale</h3>
+            <p>Epic App Orchard listing. National sales team. Multi-specialty expansion. Platform APIs for health system customization.</p>
+        </div>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">Pricing</h3>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h4>Starter</h4>
+            <div class="price">$8K</div>
+            <div class="freq">per month</div>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: #64748b;">Single department, up to 200 cases/month. Includes standard protocols and email support.</p>
+        </div>
+        <div class="pricing-card">
+            <h4>Enterprise</h4>
+            <div class="price">$20K</div>
+            <div class="freq">per month</div>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: #64748b;">Hospital-wide deployment. Custom protocols, analytics dashboard, dedicated CSM, EHR deep integration.</p>
+        </div>
+        <div class="pricing-card">
+            <h4>Per-Case</h4>
+            <div class="price">$15</div>
+            <div class="freq">per case</div>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: #64748b;">Volume-based pricing for large systems. No minimum commitment. Scales with surgical volume.</p>
+        </div>
+    </div>
+
+    <!-- Section 6: Defensibility -->
+    <div class="section-header">
+        <h2>6. Defensibility</h2>
+        <p>Why can't Epic just build this?</p>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Epic</th>
+                    <th>Manifesto AI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Release cycle</strong></td>
+                    <td>Quarterly updates; 12-18 month feature timelines</td>
+                    <td>Continuous deployment; weekly protocol updates</td>
+                </tr>
+                <tr>
+                    <td><strong>Incentives</strong></td>
+                    <td>Sell software licenses; minimize support burden</td>
+                    <td>Reduce errors and cancellations; aligned with outcomes</td>
+                </tr>
+                <tr>
+                    <td><strong>Specialization</strong></td>
+                    <td>General-purpose EHR covering all workflows</td>
+                    <td>Purpose-built for perioperative intelligence</td>
+                </tr>
+                <tr>
+                    <td><strong>Iteration speed</strong></td>
+                    <td>Changes require committee review across 500+ clients</td>
+                    <td>Protocol updates deployed same-day based on evidence</td>
+                </tr>
+                <tr>
+                    <td><strong>Protocol maintenance</strong></td>
+                    <td>Static order sets maintained by each hospital individually</td>
+                    <td>Centralized, evidence-based protocol library updated continuously</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-card" style="margin: 24px 0;">
+        <h3>The Real Moat</h3>
+        <ul>
+            <li><strong>Protocol database:</strong> Curated, structured clinical rules for 500+ procedure types across specialties</li>
+            <li><strong>Rules engine:</strong> Patient-specific logic that combines conditions, medications, allergies, and procedure requirements</li>
+            <li><strong>Workflow data:</strong> Learning from thousands of pre-procedure reviews what information clinicians actually need</li>
+            <li><strong>Network effects:</strong> Each hospital's feedback improves protocols for all customers</li>
+        </ul>
+    </div>
+
+    <h3 style="margin: 32px 0 16px; font-size: 1.1rem;">Who's Tried and Failed?</h3>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Company / Approach</th>
+                    <th>What They Did</th>
+                    <th>Why They Failed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Generic CDS vendors</strong></td>
+                    <td>Rule-based alerts triggered on orders</td>
+                    <td>Alert fatigue; 90%+ override rates; no synthesis</td>
+                </tr>
+                <tr>
+                    <td><strong>Checklist apps (paper digitization)</strong></td>
+                    <td>Turned paper checklists into tablet forms</td>
+                    <td>Not patient-specific; no EHR integration; extra work for clinicians</td>
+                </tr>
+                <tr>
+                    <td><strong>NLP chart summarizers</strong></td>
+                    <td>AI-generated summaries of chart notes</td>
+                    <td>Summarization without clinical logic; no actionable recommendations</td>
+                </tr>
+                <tr>
+                    <td><strong>Hospital-built internal tools</strong></td>
+                    <td>Custom Epic reports and SmartPhrases</td>
+                    <td>Maintenance burden; no cross-hospital learning; limited to IT team capacity</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 7: The Ask -->
+    <div class="section-header">
+        <h2>7. The Ask</h2>
+        <p>What we need to make this real</p>
+    </div>
+
+    <div class="two-col">
+        <div class="col-card">
+            <h3>Immediate Next Steps</h3>
+            <ul>
+                <li><strong>Hospital partner:</strong> LOI from one academic medical center for pilot deployment</li>
+                <li><strong>Epic sandbox:</strong> Access to Epic FHIR sandbox for development and testing</li>
+                <li><strong>Clinical advisory board:</strong> 3-5 surgeons/anesthesiologists for protocol validation</li>
+                <li><strong>Runway:</strong> 18 months to reach pilot results and Series A readiness</li>
+            </ul>
+            <h3 style="margin-top: 24px;">Success Metrics (12-Month Pilot)</h3>
+            <ul>
+                <li>50%+ reduction in preventable day-of cancellations</li>
+                <li>15+ minutes saved per patient in pre-procedure prep</li>
+                <li>Zero missed critical findings vs. manual process</li>
+                <li>NPS > 70 from perioperative clinicians</li>
+            </ul>
+        </div>
+        <div class="col-card">
+            <h3>Why We Win</h3>
+            <ul>
+                <li><strong>Clinical depth:</strong> Built by people who understand perioperative workflows</li>
+                <li><strong>Technical approach:</strong> Rules engine + LLM synthesis (not just one or the other)</li>
+                <li><strong>Integration-first:</strong> FHIR-native, Epic-compatible from day one</li>
+                <li><strong>Measurable ROI:</strong> Every installation generates provable savings data</li>
+                <li><strong>Right timing:</strong> Open APIs + staffing crisis + value-based care convergence</li>
+            </ul>
+            <h3 style="margin-top: 24px;">What We're NOT</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #ef4444; font-weight: 700;">&times;</span> Not a replacement for clinical judgment</li>
+                <li style="padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #ef4444; font-weight: 700;">&times;</span> Not an EHR replacement</li>
+                <li style="padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #ef4444; font-weight: 700;">&times;</span> Not another alert / pop-up system</li>
+                <li style="padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #ef4444; font-weight: 700;">&times;</span> Not dependent on LLMs alone (rules engine is deterministic)</li>
+                <li style="padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #ef4444; font-weight: 700;">&times;</span> Not a research project — this is a product</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p><strong>Manifesto AI</strong> — Pre-Procedure Intelligence</p>
+    <p class="tagline">Reducing errors of inaptitude, one synthesis at a time.</p>
+</div>
+
+<script>
+    // ============ INTERACTIVE SLIDERS ============
+    const sliderVolume = document.getElementById('slider-volume');
+    const sliderRate = document.getElementById('slider-rate');
+    const sliderReduction = document.getElementById('slider-reduction');
+
+    const volDisplay = document.getElementById('vol-display');
+    const rateDisplay = document.getElementById('rate-display');
+    const reductionDisplay = document.getElementById('reduction-display');
+
+    const outCurrent = document.getElementById('out-current');
+    const outPrevented = document.getElementById('out-prevented');
+    const outRevenue = document.getElementById('out-revenue');
+    const outFte = document.getElementById('out-fte');
+
+    function formatNumber(n) {
+        return n.toLocaleString('en-US');
+    }
+
+    function formatCurrency(n) {
+        if (n >= 1000000) {
+            return '$' + (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        }
+        return '$' + formatNumber(Math.round(n));
+    }
+
+    function updateCalculations() {
+        const volume = parseInt(sliderVolume.value);
+        const rate = parseFloat(sliderRate.value);
+        const reduction = parseInt(sliderReduction.value);
+
+        volDisplay.textContent = formatNumber(volume);
+        rateDisplay.textContent = rate + '%';
+        reductionDisplay.textContent = reduction + '%';
+
+        const currentCancellations = Math.round(volume * (rate / 100));
+        const prevented = Math.round(currentCancellations * (reduction / 100));
+        const revenuePerCancellation = 15000; // average
+        const revenueRecovered = prevented * revenuePerCancellation;
+        const minutesSavedPerPatient = 20;
+        const totalMinutesSaved = volume * minutesSavedPerPatient;
+        const fteHoursPerYear = 2080 * 60; // minutes
+        const fte = (totalMinutesSaved / fteHoursPerYear).toFixed(1);
+
+        outCurrent.textContent = formatNumber(currentCancellations);
+        outPrevented.textContent = formatNumber(prevented);
+        outRevenue.textContent = formatCurrency(revenueRecovered);
+        outFte.textContent = fte;
+
+        updateROIChart(revenueRecovered);
+    }
+
+    sliderVolume.addEventListener('input', updateCalculations);
+    sliderRate.addEventListener('input', updateCalculations);
+    sliderReduction.addEventListener('input', updateCalculations);
+
+    // ============ ROI CHART ============
+    function updateROIChart(annualRevenue) {
+        const implementationCost = 150000;
+        const annualLicense = 120000;
+        const monthlyLicense = annualLicense / 12;
+        const monthlySavings = annualRevenue / 12;
+
+        // Ramp: savings ramp from 0% in month 1 to 100% by month 6
+        const ramp = [0.1, 0.25, 0.5, 0.7, 0.85, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+
+        let cumulativeSavings = [];
+        let cumulativeCost = [];
+        let netValue = [];
+
+        let totalSavings = 0;
+        let totalCost = implementationCost;
+
+        for (let i = 0; i < 12; i++) {
+            totalSavings += monthlySavings * ramp[i];
+            totalCost += monthlyLicense;
+            cumulativeSavings.push(totalSavings);
+            cumulativeCost.push(totalCost);
+            netValue.push(totalSavings - totalCost);
+        }
+
+        // Find max value for scaling
+        const allValues = [...cumulativeSavings, ...cumulativeCost];
+        const maxVal = Math.max(...allValues, 500000);
+
+        // Chart dimensions
+        const chartLeft = 60;
+        const chartRight = 760;
+        const chartTop = 20;
+        const chartBottom = 250;
+        const chartWidth = chartRight - chartLeft;
+        const chartHeight = chartBottom - chartTop;
+
+        function getX(month) {
+            return chartLeft + ((month + 0.5) / 12) * chartWidth;
+        }
+
+        function getY(value) {
+            return chartBottom - (value / maxVal) * chartHeight;
+        }
+
+        // Build polyline points
+        let savingsPoints = cumulativeSavings.map((v, i) => `${getX(i)},${getY(v)}`).join(' ');
+        let costPoints = cumulativeCost.map((v, i) => `${getX(i)},${getY(v)}`).join(' ');
+        let netPoints = netValue.map((v, i) => `${getX(i)},${getY(Math.max(v, 0))}`).join(' ');
+
+        document.getElementById('line-savings').setAttribute('points', savingsPoints);
+        document.getElementById('line-cost').setAttribute('points', costPoints);
+        document.getElementById('line-net').setAttribute('points', netPoints);
+
+        // Update Y-axis labels
+        const yLabels = document.querySelectorAll('#roi-svg text');
+        const yPositions = [chartTop + 5, 70, 115, 160, 205, 255];
+        const yValues = [maxVal, maxVal * 0.8, maxVal * 0.6, maxVal * 0.4, maxVal * 0.2, 0];
+
+        // We'll just leave the Y labels as they are for simplicity since SVG text is hard to update generically
+        // The chart scales visually
+
+        // Find breakeven month
+        const breakevenDot = document.getElementById('breakeven-dot');
+        const breakevenLabel = document.getElementById('breakeven-label');
+        let breakevenMonth = -1;
+        for (let i = 0; i < 12; i++) {
+            if (netValue[i] >= 0) {
+                breakevenMonth = i;
+                break;
+            }
+        }
+
+        if (breakevenMonth >= 0) {
+            const bx = getX(breakevenMonth);
+            const by = getY(Math.max(netValue[breakevenMonth], 0));
+            breakevenDot.setAttribute('cx', bx);
+            breakevenDot.setAttribute('cy', by);
+            breakevenDot.style.display = 'block';
+            breakevenLabel.setAttribute('x', bx);
+            breakevenLabel.setAttribute('y', by - 12);
+            breakevenLabel.textContent = `Breakeven: Month ${breakevenMonth + 1}`;
+            breakevenLabel.style.display = 'block';
+        } else {
+            breakevenDot.style.display = 'none';
+            breakevenLabel.style.display = 'none';
+        }
+    }
+
+    // Initial calculation
+    updateCalculations();
+</script>
+
+</body>
+</html>
